@@ -5,6 +5,7 @@ import { ElMessage } from 'element-plus'
 
 class HttpRequest {
   baseUrl: string
+
   constructor (apiBaseUrl:string) {
     this.baseUrl = apiBaseUrl
   }
@@ -16,13 +17,8 @@ class HttpRequest {
     return instance(options)
   }
 
-  get (url: string, config: AxiosRequestConfig) {
-    const options = Object.assign({ method: 'get', url }, config)
-    this.request(options)
-  }
-
-  post (url: string, data: any) {
-    return this.request({ method: 'post', url, data })
+  private mergeConfig (options: AxiosRequestConfig): AxiosRequestConfig {
+    return Object.assign({ baseURL: this.baseUrl }, options)
   }
 
   private interceptors (instance: AxiosInstance) {
@@ -52,8 +48,13 @@ class HttpRequest {
     })
   }
 
-  private mergeConfig (options: AxiosRequestConfig): AxiosRequestConfig {
-    return Object.assign({ baseURL: this.baseUrl }, options)
+  get (url: string, config: AxiosRequestConfig) {
+    const options = Object.assign({ method: 'get', url }, config)
+    this.request(options)
+  }
+
+  post (url: string, data: any) {
+    return this.request({ method: 'post', url, data })
   }
 }
 
