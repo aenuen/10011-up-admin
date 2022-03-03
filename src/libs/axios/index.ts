@@ -1,4 +1,4 @@
 import HttpRequest from './request'
 import { apiBaseUrl } from './settings'
-export * from './interface'
+export interface ResponseData {code: number, msg: string, data?: any}
 export default new HttpRequest(apiBaseUrl)
