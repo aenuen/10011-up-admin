@@ -1,6 +1,7 @@
-// noinspection JSUnusedLocalSymbols
-
 import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios'
+import store from '@/store'
+import { getToken } from '@/libs/token'
+import { ElMessage } from 'element-plus'
 
 class HttpRequest {
   baseUrl: string
@@ -15,28 +16,37 @@ class HttpRequest {
     return instance(options)
   }
 
-  // get (url: string, config: AxiosRequestConfig) {
-  //   const options = Object.assign({ method: 'get', url }, config)
-  //   this.request(options)
-  // }
-  //
-  // post (url: string, data: any) {
-  //   this.request({ method: 'post', url, data })
-  // }
+  get (url: string, config: AxiosRequestConfig) {
+    const options = Object.assign({ method: 'get', url }, config)
+    this.request(options)
+  }
+
+  post (url: string, data: any) {
+    return this.request({ method: 'post', url, data })
+  }
 
   private interceptors (instance: AxiosInstance) {
     instance.interceptors.request.use((config: AxiosRequestConfig) => {
+      if (store.getters.token) {
+        config.headers = {
+          Authorization: `Bearer ${getToken()}`,
+          'Content-Type': 'application/json',
+          'cached-control': 'no-cache'
+        }
+      }
       return config
     }, (error) => {
       return Promise.reject(error)
     })
-    instance.interceptors.response.use((res: AxiosResponse) => {
-      const { data } = res
-      const { code, msg } = data
-      if (code !== 0) {
-        console.error(msg)
+    instance.interceptors.response.use((response: AxiosResponse) => {
+      const res = response.data
+      if (res.code !== 200) {
+        const errMsg = res.msg || '请求失败！'
+        ElMessage({ message: errMsg, type: 'error', duration: 5 * 1000 })
+        return Promise.reject(new Error(errMsg))
+      } else {
+        return res
       }
-      return res
     }, (error) => {
       return Promise.reject(error)
     })

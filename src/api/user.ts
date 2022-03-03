@@ -5,9 +5,5 @@ interface LoginData {
   password: string
 }
 export const userLogin = (loginData: LoginData): AxiosPromise<ResponseData> => {
-  return axios.request({
-    url: '/user/login',
-    data: loginData,
-    method: 'POST'
-  })
+  return axios.post('/user/login', { ...loginData })
 }
