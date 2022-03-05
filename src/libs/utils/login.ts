@@ -1,6 +1,7 @@
 import { reactive } from 'vue'
 import store from '@/store'
 import { v4 as uuid } from 'uuid'
+import { HttpResponse } from '@/libs/axios'
 import { publicCaptcha } from '@/api/public'
 
 export const loginUtils = () => {
@@ -19,10 +20,10 @@ export const loginUtils = () => {
       localStorage.setItem('sid', sid)
     }
     store.commit('SetSid', sid)
-    publicCaptcha({ sid }).then((res) => {
-      const { data } = res
-      state.captcha = `${data}`
-    })
+    const { code, data } = await publicCaptcha({ sid }) as HttpResponse
+    if (code === 200) {
+      state.captcha = data
+    }
   }
   return {
     state,

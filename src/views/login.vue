@@ -96,29 +96,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { Form, Field } from 'vee-validate'
+import { loginUtils } from '@/libs/utils/login'
 
 export default defineComponent({
   name: 'ViewsLogin',
   components: { Form, Field },
   setup () {
-    const state = reactive({
-      username: '',
-      password: '',
-      code: '',
-      svg: ''
-    })
+    const { state, getCaptcha } = loginUtils()
     const submit = () => {
       console.log(1)
     }
-    const getCaptcha = () => {
-      console.log(2)
-    }
+    onMounted(async () => await getCaptcha())
     return {
-      ...state,
-      submit,
-      getCaptcha
+      state,
+      getCaptcha,
+      submit
     }
   }
 })

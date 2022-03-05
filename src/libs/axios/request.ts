@@ -1,7 +1,8 @@
-import axios, { AxiosInstance, AxiosRequestConfig, Canceler } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, Canceler } from 'axios'
 import store from '@/store'
 import { errorHandle } from './errorHandle'
 import { getToken } from '@/libs/token'
+import { HttpResponse } from './index'
 const CancelToken = axios.CancelToken
 class Request {
   private readonly baseUrl: string
@@ -70,12 +71,12 @@ class Request {
     return instance(newOptions)
   }
 
-  get (url: string, config?: AxiosRequestConfig) { // get请求
+  get (url: string, config?: AxiosRequestConfig):Promise<AxiosResponse>|Promise<HttpResponse> { // get请求
     const options = Object.assign({ method: 'get', url: url }, config)
     return this.request(options)
   }
 
-  post (url: string, data: any) { // post请求
+  post (url: string, data: any):Promise<AxiosResponse>|Promise<HttpResponse> { // post请求
     return this.request({ method: 'post', url: url, data: data })
   }
 }
