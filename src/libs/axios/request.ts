@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, Canceler } from 'axios'
 import store from '@/store'
 import { errorHandle } from './errorHandle'
-import { publicPath } from './settings'
+import { getToken } from '@/libs/token'
 const CancelToken = axios.CancelToken
 class Request {
   private readonly baseUrl: string
@@ -31,13 +31,12 @@ class Request {
 
   interceptors (instance: AxiosInstance) {
     instance.interceptors.request.use((config) => { // 请求拦截器
-      let isPublic = false
-      publicPath.forEach((path) => {
-        isPublic = isPublic || path.test(config.url || '')
-      })
-      const token = store.state.token
-      if (!isPublic && token) {
-        // config.headers.Authorization = `Bearer ${token}`
+      if (store.getters.token) {
+        config.headers = {
+          Authorization: `Bearer ${getToken()}`,
+          'Content-Type': 'application/json',
+          'cached-control': 'no-cache'
+        }
       }
       const key = `${config.url}&${config.method}`
       this.removePending(key, true)
@@ -46,9 +45,7 @@ class Request {
       })
       return config
     }, (err) => {
-      // debugger
       errorHandle(err)
-      // Do something with request error
       return Promise.reject(err)
     })
 
