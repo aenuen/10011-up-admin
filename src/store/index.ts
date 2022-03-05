@@ -40,6 +40,7 @@ export default createStore({
     }
   },
   getters: {
+    token: (state) => state.token,
     uid: (state) => state.userInfo ? state.userInfo._id : ''
   },
   actions: {
