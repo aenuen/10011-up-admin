@@ -32,13 +32,15 @@ class Request {
 
   interceptors (instance: AxiosInstance) {
     instance.interceptors.request.use((config) => { // 请求拦截器
-      if (store.getters.token) {
-        config.headers = {
-          Authorization: `Bearer ${getToken()}`,
-          'Content-Type': 'application/json',
-          'cached-control': 'no-cache'
-        }
-      }
+      config.headers = store.getters.token
+        ? {
+            'Content-Type': 'application/json;charset=utf-8',
+            'cached-control': 'no-cache',
+            Authorization: `Bearer ${getToken()}`
+          }
+        : {
+            'Content-Type': 'application/json;charset=utf-8'
+          }
       const key = `${config.url}&${config.method}`
       this.removePending(key, true)
       config.cancelToken = new CancelToken((c) => {
