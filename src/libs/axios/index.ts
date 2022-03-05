@@ -1,4 +1,4 @@
-import HttpRequest from './request'
+import Request from './request'
 import { apiBaseUrl } from './settings'
-export interface ResponseData {code: number, msg: string, data?: any}
-export default new HttpRequest(apiBaseUrl)
+const axios = new Request(apiBaseUrl)
+export default axios
