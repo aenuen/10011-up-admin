@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <span class="icon iconfont icon-message-02" style="font-size: 30px;" />
+    <el-icon :size="30" color="blue"><Aim/></el-icon>
   </div>
 </template>
 

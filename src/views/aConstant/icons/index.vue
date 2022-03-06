@@ -34,7 +34,7 @@
             <el-tooltip placement="top">
               <template #content>{{ getSvgIcon(item) }}</template>
               <div class="icon-item">
-                <svg-icon :icon-class="item" class-name="disabled" />
+                <svg-icon :icon-class="item" class-name="disabled" style="font-size: 30px;" />
                 <span>{{ item }}</span>
               </div>
             </el-tooltip>
@@ -47,30 +47,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import elementAry from '@/components/Icons/element/elementAry'
-import fontAry from '@/components/Icons/font/fontAry'
-import svgAry from '@/components/Icons/svg/svgAry'
-import clipboard from '@/libs/clipboard'
+import { iconsUtils } from './iconsUtils'
 
 export default defineComponent({
   name: 'IconsIndex',
   setup () {
-    const handleClipboard = (text:string, eleCls:string) => {
-      clipboard(text, eleCls)
-    }
-    const getElementIcon = (item:string) => `<el-icon><${item} /></el-icon>`
-    const getFontIcon = (item:string) => `<span class="icon iconfont icon-${item}" style="font-size: 30px;" />`
-    const getSvgIcon = (item:string) => `<svg-icon icon-class="${item}" />`
-    const getComponents = (item:string) => `<${item}/>`
+    const state = iconsUtils()
     return {
-      elementAry,
-      fontAry,
-      svgAry,
-      handleClipboard,
-      getElementIcon,
-      getFontIcon,
-      getSvgIcon,
-      getComponents
+      ...state
     }
   }
 })
@@ -89,9 +73,9 @@ export default defineComponent({
 
   .icon-item {
     margin: 20px;
+    width: 150px;
     height: 85px;
     text-align: center;
-    width: 100px;
     float: left;
     font-size: 30px;
     color: #24292e;
@@ -100,7 +84,7 @@ export default defineComponent({
 
   span {
     display: block;
-    font-size: 16px;
+    font-size: 14px;
     margin-top: 10px;
   }
 
