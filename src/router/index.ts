@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/aConstant/home/index.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,7 +10,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/login.vue')
+    component: () => import(/* webpackChunkName: "login" */ '../views/aConstant/login/index.vue')
+  },
+  {
+    path: '/icons',
+    name: 'icons',
+    component: () => import(/* webpackChunkName: "icons" */ '../views/aConstant/icons/index.vue')
   },
   {
     path: '/401',

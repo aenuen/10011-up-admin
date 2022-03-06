@@ -1,0 +1,51 @@
+{
+  "id": "3224422",
+  "name": "我的图标",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "33520",
+      "name": "message",
+      "font_class": "message",
+      "unicode": "e6bc",
+      "unicode_decimal": 59068
+    },
+    {
+      "icon_id": "109762",
+      "name": "message",
+      "font_class": "message-01",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "159926",
+      "name": "Message",
+      "font_class": "message-02",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "7008965",
+      "name": "message",
+      "font_class": "message-03",
+      "unicode": "e70c",
+      "unicode_decimal": 59148
+    },
+    {
+      "icon_id": "33516",
+      "name": "home",
+      "font_class": "home",
+      "unicode": "e6b8",
+      "unicode_decimal": 59064
+    },
+    {
+      "icon_id": "27585558",
+      "name": "教学计划",
+      "font_class": "plan",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    }
+  ]
+}
