@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "11674001",
+      "name": "home",
+      "font_class": "home01",
+      "unicode": "e7a6",
+      "unicode_decimal": 59302
+    },
+    {
       "icon_id": "33520",
       "name": "message",
       "font_class": "message",
@@ -15,21 +22,21 @@
     {
       "icon_id": "109762",
       "name": "message",
-      "font_class": "message-01",
+      "font_class": "message01",
       "unicode": "e631",
       "unicode_decimal": 58929
     },
     {
       "icon_id": "159926",
       "name": "Message",
-      "font_class": "message-02",
+      "font_class": "message02",
       "unicode": "e600",
       "unicode_decimal": 58880
     },
     {
       "icon_id": "7008965",
       "name": "message",
-      "font_class": "message-03",
+      "font_class": "message03",
       "unicode": "e70c",
       "unicode_decimal": 59148
     },

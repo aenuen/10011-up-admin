@@ -1,20 +1,13 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../../../assets/logo.png">
-    <span class="icon iconfont icon-message"/>
-    <svg-icon icon-class="404" />
-    <el-icon class="is-loading">
-      <edit />
-    </el-icon>
+    <span class="icon iconfont icon-message-02" style="font-size: 30px;" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Edit } from '@element-plus/icons-vue'
 
 export default defineComponent({
-  name: 'HomeView',
-  components: { Edit }
+  name: 'HomeView'
 })
 </script>
