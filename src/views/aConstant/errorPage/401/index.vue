@@ -15,19 +15,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { ArrowLeft } from '@element-plus/icons-vue'
-import { useRouter } from 'vue-router'
+import { error401Utils } from './error401Utils'
 
 export default defineComponent({
   name: 'ErrorPage401',
   setup () {
-    const router = useRouter()
-    const back = () => {
-      router.go(-1)
-    }
+    const state = error401Utils()
     return {
-      back,
-      ArrowLeft
+      ...state
     }
   }
 })
