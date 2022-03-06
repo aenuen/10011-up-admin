@@ -17,7 +17,7 @@
       </el-tab-pane>
       <el-tab-pane label="ElementUI图标">
         <div class="grid">
-          <div v-for="item of elementIconsAry" :key="item" @click="handleClipboard(getElementIcon(item),$event)">
+          <div v-for="item of elementAry" :key="item" @click="handleClipboard(getElementIcon(item),$event)">
             <el-tooltip placement="top">
               <template #content>{{ getElementIcon(item) }}</template>
               <div class="icon-item">
@@ -34,8 +34,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import elementIconsAry from './data/elementIconsAry'
-import svgIconsAry from './data/svgIconsAry'
+import elementAry from '@/components/Icons/element/elementAry'
+import svgAry from '@/components/Icons/svg/svgAry'
 
 export default defineComponent({
   name: 'IconsIndex',
@@ -46,8 +46,8 @@ export default defineComponent({
     const getSvgIcon = (symbol:string) => `<svg-icon icon-class="${symbol}" />`
     const getElementIcon = (symbol:string) => `<i class="el-icon-${symbol}" />`
     return {
-      elementIconsAry,
-      svgIconsAry,
+      elementAry,
+      svgIconsAry: svgAry,
       handleClipboard,
       getSvgIcon,
       getElementIcon
