@@ -1,7 +1,7 @@
+import Cookies from 'js-cookie'
 import { createStore } from 'vuex'
 import { getToken, setToken } from '@/libs/token'
 import { HttpResponse } from '@/libs/axios'
-import Cookies from 'js-cookie'
 import { userLogin, userInfo } from '@/api/user'
 
 const store = createStore({
