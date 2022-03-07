@@ -1,31 +1,37 @@
 <template>
   <div class="login-container">
-    <LoginForm :post-form="postForm" @loginSubmit="loginSubmit" />
+    <LoginForm :post-form="state" @submitLogin="submitLogin" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent } from 'vue'
+import store from '@/store'
 import LoginForm from './components/loginForm.vue'
+import { routerUtils } from '@/libs/utils/router'
+import { loginUtils } from './utils/loginUtils'
+import { CryptoJsEncode } from '@/libs/cryptoJs'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
   name: 'LoginIndex',
   components: { LoginForm },
   setup () {
-    const state = reactive({
-      postForm: {
-        username: '',
-        password: ''
-      },
-      otherQuery: {}
-    })
-    const loginSubmit = () => {
-      console.log(1)
+    const { state, getCaptcha } = loginUtils()
+    const { goToPath } = routerUtils()
+    const submitLogin = () => {
+      store.dispatch('login', {
+        username: CryptoJsEncode(state.username),
+        password: CryptoJsEncode(state.password)
+      }).then(() => {
+        goToPath('/')
+      }).catch((err) => {
+        ElMessage.success(err)
+      })
     }
-    return {
-      ...state,
-      loginSubmit
-    }
+
+    submitLogin()
+    return { state, getCaptcha, submitLogin }
   }
 })
 </script>

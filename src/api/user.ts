@@ -1,4 +1,6 @@
 import axios from '@/libs/axios'
 
-interface LoginData {username: string;password: string}
-export const userLogin = (loginData: LoginData) => axios.post('/user/login', loginData)
+export interface UserLoginFace {username: string;password: string}
+export const userLogin = (loginData: UserLoginFace) => axios.post('/user/login', loginData)
+
+export const userInfo = () => axios.get('/user/info')

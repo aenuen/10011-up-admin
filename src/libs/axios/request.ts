@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, Canceler } from 'axios'
 import store from '@/store'
-import { errorHandle } from './errorHandle'
 import { getToken } from '@/libs/token'
 import { HttpResponse } from './index'
+import { ElMessage } from 'element-plus'
 const CancelToken = axios.CancelToken
 class Request {
   private readonly baseUrl: string
@@ -32,7 +32,7 @@ class Request {
 
   interceptors (instance: AxiosInstance) {
     instance.interceptors.request.use((config) => { // 请求拦截器
-      config.headers = store.getters.token
+      config.headers = store.getters['user/token']
         ? {
             'Content-Type': 'application/json;charset=utf-8',
             'cached-control': 'no-cache',
@@ -48,21 +48,29 @@ class Request {
       })
       return config
     }, (err) => {
-      errorHandle(err)
       return Promise.reject(err)
     })
 
     instance.interceptors.response.use((res) => { // 响应拦截器
       const key = res.config.url + '&' + res.config.method
       this.removePending(key)
-      if (res.status === 200) {
-        return Promise.resolve(res.data)
+      const result = res.data
+      if (result.code !== 200) {
+        const errMsg = result.msg || '请求失败！'
+        ElMessage({ message: errMsg, type: 'error', duration: 5 * 1000 })
+        return Promise.reject(new Error(errMsg))
       } else {
-        return Promise.reject(res)
+        return result
       }
-    }, (err) => {
-      errorHandle(err)
-      return Promise.reject(err)
+    }, (error) => {
+      const { code, msg } = error.response.data
+      ElMessage({ message: msg || '', type: 'error', duration: 5 * 1000 })
+      if (code === -2) {
+        setTimeout(() => {
+          location.reload()
+        }, 1000)
+      }
+      return Promise.reject(error)
     })
   }
 

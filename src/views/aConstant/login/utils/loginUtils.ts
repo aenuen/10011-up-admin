@@ -5,12 +5,7 @@ import { HttpResponse } from '@/libs/axios'
 import { publicCaptcha } from '@/api/public'
 
 export const loginUtils = () => {
-  const state = reactive({
-    username: '',
-    password: '',
-    authCode: '',
-    captcha: ''
-  })
+  const state = reactive({ username: 'admin', password: 'ee123123', authCode: '', captcha: '' })
   let sid = ''
   const getCaptcha = async () => {
     if (localStorage.getItem('sid')) {
@@ -25,6 +20,7 @@ export const loginUtils = () => {
       state.captcha = data
     }
   }
+
   return {
     state,
     getCaptcha
