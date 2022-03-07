@@ -60,7 +60,7 @@ class Request {
         ElMessage({ message: errMsg, type: 'error', duration: 5 * 1000 })
         return Promise.reject(new Error(errMsg))
       } else {
-        return res
+        return result
       }
     }, (error) => {
       const { code, msg } = error.response.data
