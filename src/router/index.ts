@@ -1,21 +1,44 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/aConstant/home/index.vue'
+import Layout from '@/views/aConstant/layout/index.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: Layout,
+    redirect: '/home',
+    children: [
+      {
+        component: () => import(/* webpackChunkName: "home" */ '@/views/aConstant/home/index.vue'),
+        path: 'home',
+        name: 'home',
+        meta: { title: '首页', icon: 'chart', affix: true }
+      }
+    ]
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/aConstant/login/index.vue')
+    component: () => import(/* webpackChunkName: "login" */ '@/views/aConstant/login/index.vue')
   },
+
   {
     path: '/icons',
     name: 'icons',
-    component: () => import(/* webpackChunkName: "icons" */ '../views/aConstant/icons/index.vue')
+    component: Layout,
+    children: [
+      {
+        path: '/iconsIndex',
+        name: 'iconsIndex',
+        component: () => import(/* webpackChunkName: "icons" */ '../views/aConstant/icons/index.vue'),
+        meta: {
+          title: '图标浏览',
+          icon: 'icon',
+          roles: ['admin'],
+          noCache: true
+        }
+      }
+    ]
   },
   {
     path: '/401',

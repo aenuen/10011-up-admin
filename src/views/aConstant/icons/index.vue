@@ -62,7 +62,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .icons-container {
-  margin: 10px 20px 0;
   overflow: hidden;
 
   .grid {
