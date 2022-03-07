@@ -1,10 +1,71 @@
 import { createStore } from 'vuex'
 import { getToken, setToken } from '@/libs/token'
 import { HttpResponse } from '@/libs/axios'
+import Cookies from 'js-cookie'
 import { userLogin, userInfo } from '@/api/user'
 
 const store = createStore({
   modules: {
+    app: {
+      namespaced: true,
+      state: {
+        sidebar: {
+          opened: () => Cookies.get('sidebarStatus') ? !!Number(Cookies.get('sidebarStatus')) : true,
+          withoutAnimation: false
+        },
+        device: 'desktop',
+        size: Cookies.get('size') || 'medium'
+      },
+      mutations: {
+        TOGGLE_SIDEBAR: state => {
+          state.sidebar.opened = !state.sidebar.opened
+          state.sidebar.withoutAnimation = false
+          if (state.sidebar.opened) {
+            Cookies.set('sidebarStatus', '1')
+          } else {
+            Cookies.set('sidebarStatus', '0')
+          }
+        },
+        CLOSE_SIDEBAR: (state, withoutAnimation) => {
+          Cookies.set('sidebarStatus', '0')
+          state.sidebar.opened = false
+          state.sidebar.withoutAnimation = withoutAnimation
+        },
+        TOGGLE_DEVICE: (state, device) => {
+          state.device = device
+        },
+        SET_SIZE: (state, size) => {
+          state.size = size
+          Cookies.set('size', size)
+        }
+      },
+      actions: {
+        toggleSideBar: {
+          root: true,
+          handler ({ commit }) {
+            commit('TOGGLE_SIDEBAR')
+          }
+        },
+        closeSideBar: {
+          root: true,
+          handler ({ commit }, { withoutAnimation }) {
+            commit('CLOSE_SIDEBAR', withoutAnimation)
+          }
+        },
+        toggleDevice: {
+          root: true,
+          handler ({ commit }, { device }) {
+            commit('TOGGLE_DEVICE', device)
+          }
+        },
+        setSize: {
+          root: true,
+          handler ({ commit }, size) {
+            commit('SET_SIZE', size)
+          }
+        }
+      }
+    },
     user: {
       namespaced: true,
       state: {
