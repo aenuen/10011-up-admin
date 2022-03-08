@@ -1,6 +1,7 @@
 <template>
   <div class="login-container">
     <LoginForm :post-form="state" @submitLogin="submitLogin" />
+    <div v-html="state.captcha"/>
   </div>
 </template>
 
@@ -8,7 +9,6 @@
 import { defineComponent } from 'vue'
 import store from '@/store'
 import LoginForm from './components/loginForm.vue'
-import { routerUtils } from '@/libs/utils/router'
 import { loginUtils } from './utils/loginUtils'
 import { CryptoJsEncode } from '@/libs/cryptoJs'
 import { ElMessage } from 'element-plus'
@@ -18,18 +18,19 @@ export default defineComponent({
   components: { LoginForm },
   setup () {
     const { state, getCaptcha } = loginUtils()
-    const { goToPath } = routerUtils()
     const submitLogin = () => {
       store.dispatch('login', {
         username: CryptoJsEncode(state.username),
         password: CryptoJsEncode(state.password)
-      }).then(() => {
-        goToPath('/')
+      }).then((res) => {
+        console.log(res)
+        // goToPath('/')
       }).catch((err) => {
         ElMessage.success(err)
       })
     }
 
+    getCaptcha()
     submitLogin()
     return { state, getCaptcha, submitLogin }
   }
