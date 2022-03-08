@@ -6,13 +6,15 @@ module.exports = defineConfig({
   devServer: {
     host: 'localhost',
     port: 20011,
-    open: true
+    proxy: 'http://localhost:10010'
   },
   chainWebpack: (config) => {
-    // const svgRule = config.module.rule('svg')
-    // svgRule.uses.clear()
-    config.module.rule('svg').exclude.add(resolve('src/components/Icons/svg/files')).end()
-    config.module.rule('icons').test(/\.svg$/).include.add(resolve('src/components/Icons/svg/files')).end()
-      .use('svg-sprite-loader').loader('svg-sprite-loader').options({ symbolId: 'icon-[name]' }).end()
+    const svgRule = config.module.rule('svg')
+    svgRule.uses.clear()
+    svgRule.exclude.add(resolve('src/components/Icons/svg/files')).end()
+    config.module.rule('icons')
+      .test(/\.svg$/).include.add(resolve('src/components/Icons/svg/files')).end()
+      .use('svg-sprite-loader').loader('svg-sprite-loader')
+      .options({ symbolId: 'icon-[name]' }).end()
   }
 })
