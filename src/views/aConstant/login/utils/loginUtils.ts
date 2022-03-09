@@ -1,42 +1,65 @@
 import { reactive } from 'vue'
 import { v4 as uuid } from 'uuid'
 import { HttpResponse } from '@/libs/axios'
+import { CryptoJsEncode } from '@/libs/cryptoJs'
+import { routerUtils } from '@/libs/utils/router'
 import { publicCaptcha } from '@/api/public'
 import store from '@/store'
-import { CryptoJsEncode } from '@/libs/cryptoJs'
 import { ElMessage } from 'element-plus'
 
 export const loginUtils = () => {
-  const state = reactive({ username: 'admin', password: 'ee123123', authCode: '', captcha: '', sid: '' })
+  const { goToPath } = routerUtils()
+  const postForm = reactive({
+    username: 'admin',
+    password: 'ee123123',
+    authCode: '',
+    sid: ''
+  })
+  const otherData = reactive({
+    captcha: '',
+    inputType: 'password',
+    loading: false
+  })
   const getCaptcha = async () => {
     if (localStorage.getItem('sid')) {
-      state.sid = localStorage.getItem('sid') || ''
+      postForm.sid = localStorage.getItem('sid') || ''
     } else {
-      state.sid = uuid()
-      localStorage.setItem('sid', state.sid)
+      postForm.sid = uuid()
+      localStorage.setItem('sid', postForm.sid)
     }
-    const { code, data } = await publicCaptcha({ sid: state.sid }) as HttpResponse
+    const {
+      code,
+      data
+    } = await publicCaptcha({
+      sid: postForm.sid,
+      height: 36
+    }) as HttpResponse
     if (code === 200) {
-      state.captcha = data
+      otherData.captcha = data
     }
   }
   const submitLogin = () => {
     store.dispatch('login', {
-      username: CryptoJsEncode(state.username),
-      password: CryptoJsEncode(state.password),
-      authCode: state.authCode,
-      sid: state.sid
-    }).then((res) => {
-      console.log(res)
-      // goToPath('/')
+      username: CryptoJsEncode(postForm.username),
+      password: CryptoJsEncode(postForm.password),
+      authCode: postForm.authCode,
+      sid: postForm.sid
+    }).then(() => {
+      goToPath('/')
     }).catch((err) => {
       ElMessage.success(err)
     })
   }
-
+  const fields = {
+    username: '用户名',
+    password: '密码',
+    authCode: '验证码'
+  }
   return {
-    state,
+    postForm,
+    otherData,
     getCaptcha,
-    submitLogin
+    submitLogin,
+    fields
   }
 }

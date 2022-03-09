@@ -1,7 +1,6 @@
 <template>
   <div class="login-container">
-
-    <el-form ref="loginForm" :model="state" class="login-form" autocomplete="off" label-position="left">
+    <el-form ref="loginForm" :model="postForm" class="login-form" autocomplete="off" label-position="left">
       <div class="title-container">
         <h3 class="title">管理员登录</h3>
       </div>
@@ -11,9 +10,9 @@
         </span>
         <el-input
           ref="username"
-          v-model="state.username"
-          placeholder="用户名"
           name="username"
+          v-model="postForm.username"
+          :placeholder="fields.username"
           type="text"
           tabindex="1"
           autocomplete="off"
@@ -26,36 +25,70 @@
           </span>
           <el-input
             ref="password"
-            v-model="state.password"
-            type="text"
-            placeholder="密码"
             name="password"
+            v-model="postForm.password"
+            :placeholder="fields.password"
+            :type="otherData.inputType"
             tabindex="2"
             autocomplete="off"
           />
         </el-form-item>
       </el-tooltip>
+      <el-form-item prop="password">
+        <span class="svg-container">
+          <svg-icon icon-class="images" />
+        </span>
+        <el-input
+          ref="authCode"
+          name="authCode"
+          class="authCode"
+          v-model="postForm.authCode"
+          :placeholder="fields.authCode"
+          type="text"
+          tabindex="3"
+          autocomplete="off"
+        />
+        <el-tooltip content="看不清，换一张" placement="right" manual>
+          <div class="captcha">
+            <span v-html="otherData.captcha" @click="getCaptcha" />
+          </div>
+        </el-tooltip>
+      </el-form-item>
+      <el-form-item>
+        <el-button
+          :loading="otherData.loading"
+          type="primary"
+          style="margin-left:60px;width:440px;"
+          @click="submitLogin">登录</el-button>
+      </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { loginUtils } from './utils/loginUtils'
 
 export default defineComponent({
   name: 'LoginIndex',
   setup () {
     const {
-      state,
+      postForm,
+      otherData,
+      fields,
       getCaptcha,
       submitLogin
     } = loginUtils()
-
-    getCaptcha()
-    submitLogin()
+    setTimeout(() => {
+      getCaptcha()
+    }, 500)
+    onMounted(() => {
+      //
+    })
     return {
-      state,
+      postForm,
+      otherData,
+      fields,
       getCaptcha,
       submitLogin
     }
@@ -84,43 +117,48 @@ $cursorColor: #fff;
     margin: 0 auto;
     overflow: hidden;
 
+    .title-container {
+      text-align: center;
+      color: #fff
+    }
+
     .el-form-item {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      color: #454545;
+      height: 44px;
     }
 
     .svg-container {
+      display: inline-block;
       padding: 6px 5px 6px 25px;
       color: $dark_gray;
       vertical-align: middle;
       width: 30px;
-      display: inline-block;
     }
 
-    .el-input {
+    .captcha {
       display: inline-block;
-      width: 85%;
+      position: relative;
 
-      input {
-        background: transparent !important;
-        border: 0;
-        -webkit-appearance: none;
-        border-radius: 0;
-        padding: 12px 5px 12px 15px;
-        color: $lightColor;
-        caret-color: $cursorColor;
-
-        &:-webkit-autofill {
-          box-shadow: 0 0 0 1000px $bgColor inset !important;
-          -webkit-text-fill-color: $cursorColor !important;
-        }
+      span {
+        position: absolute;
+        left: 0;
+        top: -18px;
       }
     }
 
-    .el-input.el-input__inner {
-      background-color: rgba(255, 255, 255, 0.247) !important;
+    .el-input {
+      width: 440px;
+
+      &.authCode {
+        width: 290px;
+      }
+    }
+  }
+
+  .button-wrap {
+    width: 400px;
+    margin: 0 auto;
+
+    .el-button {
     }
   }
 }
