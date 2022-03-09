@@ -1,0 +1,168 @@
+/* 颜色 */
+.gray {
+  color: #999 !important
+}
+
+.orange {
+  color: #f72 !important
+}
+
+.errors {
+  color: #f30 !important
+}
+
+.blue {
+  color: rgb(95, 95, 255) !important
+}
+
+/* 文本 */
+.t-center {
+  text-align: center !important
+}
+
+.t-left {
+  text-align: left !important
+}
+
+.t-right {
+  text-align: right !important
+}
+
+/* 浮动 */
+.f-left {
+  float: left !important;
+}
+
+.f-right {
+  float: right !important;
+}
+
+.c-pointer {
+  cursor: pointer !important;
+}
+
+/* 文本框 */
+.textarea-no-size {
+  resize: none !important
+}
+
+/* 固定浮动-基础 */
+.fixed-base {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@for $i from 0 through 20 {
+
+  .pd#{$i} {
+    padding: $i * 10 + px !important;
+  }
+
+  .pt#{$i} {
+    padding-top: $i * 10 + px !important;
+  }
+
+  .pr#{$i} {
+    padding-right: $i * 10 + px !important;
+  }
+
+  .pb#{$i} {
+    padding-bottom: $i * 10 + px !important;
+  }
+
+  .pl#{$i} {
+    padding-left: $i * 10 + px !important;
+  }
+
+  .px#{$i} {
+    padding-left: $i * 10 + px !important;
+    padding-right: $i * 10 + px !important;
+  }
+
+  .py#{$i} {
+    padding-top: $i * 10 + px !important;
+    padding-bottom: $i * 10 + px !important;
+  }
+
+  .mg#{$i} {
+    margin: $i * 10 + px !important;
+  }
+
+  .mt#{$i} {
+    margin-top: $i * 10 + px !important;
+  }
+
+  .mr#{$i} {
+    margin-right: $i * 10 + px !important;
+  }
+
+  .mb#{$i} {
+    margin-bottom: $i * 10 + px !important;
+  }
+
+  .ml#{$i} {
+    margin-left: $i * 10 + px !important;
+  }
+
+  .mx#{$i} {
+    margin-left: $i * 10 + px !important;
+    margin-right: $i * 10 + px !important;
+  }
+
+  .my#{$i} {
+    margin-top: $i * 10 + px !important;
+    margin-bottom: $i * 10 + px !important;
+  }
+
+}
+
+/* 动画-放大 */
+
+@keyframes action-bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes action-bounceOut {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+.bounce-leave-active {
+  animation: action-bounceOut 0.3s;
+}
+
+.bounce-enter-active,
+.bounce-enter-to {
+  animation: action-bounceIn 0.3s;
+}
+
+/* 动画-抖动 */
+@keyframes action-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+}

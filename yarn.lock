@@ -5152,7 +5152,7 @@ merge2@^1.3.0, merge2@^1.4.1:
 
 methods-libs@^1.0.6:
   version "1.0.6"
-  resolved "https://registry.npmjs.org/methods-libs/-/methods-libs-1.0.6.tgz"
+  resolved "https://registry.npmmirror.com/methods-libs/-/methods-libs-1.0.6.tgz#161c3229059a4fa82685ed6ce4833e1112ecc1a6"
   integrity sha512-ycuIgRLtBsIu5CJKzvbNHkfUqDifF0kVva0xj9IGKS3m8ssnSvRoDQlVk243wm189n5kRoSvMDDSociTrZyAOw==
 
 methods@~1.1.2:
