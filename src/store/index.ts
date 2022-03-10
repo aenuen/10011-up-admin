@@ -81,7 +81,14 @@ const store = createStore({
       },
       getters: {
         aid: state => state.aid,
-        token: state => state.token
+        token: state => state.token,
+        avatar: state => state.avatar,
+        realName: state => state.realName,
+        petName: state => state.petName,
+        email: state => state.email,
+        mobile: state => state.mobile,
+        introduction: state => state.introduction,
+        roles: state => state.roles
       },
       mutations: {
         SET_AID: (state, aid) => {
@@ -121,8 +128,8 @@ const store = createStore({
               const loginModel = { username: username.trim(), password: password.trim() }
               const { code, data } = await userLogin(loginModel) as HttpResponse
               if (code === 200) {
-                commit('SET_TOKEN', data.token)
-                setToken(data.token)
+                commit('SET_TOKEN', data)
+                setToken(data)
                 resolve('登录成功')
               } else {
                 reject(new Error('登录失败'))

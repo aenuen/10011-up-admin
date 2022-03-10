@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   title: '居乐律师', // 项目名称
   port: 10001, // 项目端口
   showSettings: false, // 是否显示 showSettings
