@@ -7,8 +7,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import store from '@/store'
 
 export default defineComponent({
-  name: 'HomeView'
+  name: 'HomeView',
+  setup () {
+    console.log(store.getters['user/aid'])
+  }
 })
 </script>

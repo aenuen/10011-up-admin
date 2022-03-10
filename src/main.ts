@@ -1,22 +1,31 @@
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
+import Cookies from 'js-cookie'
+
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+
 import 'normalize.css/normalize.css'
 import '@/assets/style/layout.scss'
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
-import '@/libs/utils/vee-validate'
 import '@/components/Icons/font/files/iconfont.css'
+
+import '@/libs/utils/vee-validate'
 import SvgIcon from '@/components/Icons/svg/index.vue'
 import * as Icons from '@element-plus/icons-vue'
 
 const app = createApp(App)
-app.component('svg-icon', SvgIcon).use(store).use(router).use(ElementPlus).mount('#app')
 
-Object.keys(Icons).forEach(key => {
+Object.keys(Icons).forEach((key) => {
   app.component(key, Icons[key as keyof typeof Icons])
 })
+
+app.use(ElementPlus, { size: Cookies.get('size') || 'default' })
+
+app.component('svg-icon', SvgIcon).use(store).use(router).use(ElementPlus).mount('#app')
+
 // import { createVNode } from 'vue'
 // createVNode 方式注册组件(使用：<ele-icon :icon="item" style="width: 30px;height:30px;"/>)
 // const Icon = (props: { icon: string }) => {

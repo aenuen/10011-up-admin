@@ -1,11 +1,13 @@
 <template>
   <section class="app-main">
     <div style="padding: 20px;">
-      <transition name="fade-transform" mode="out-in">
-        <keep-alive :include="cachedViews">
-          <router-view :key="key" />
-        </keep-alive>
-      </transition>
+      <router-view v-slot="{ Component }" :key="key">
+        <transition name="fade-transform" mode="out-in">
+          <keep-alive>
+            <component :is="Component"/>
+          </keep-alive>
+        </transition>
+      </router-view>
     </div>
   </section>
 </template>

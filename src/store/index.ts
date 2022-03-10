@@ -69,7 +69,7 @@ const store = createStore({
     user: {
       namespaced: true,
       state: {
-        aid: '',
+        aid: '123',
         token: getToken(),
         realName: '',
         petName: '',
@@ -80,6 +80,7 @@ const store = createStore({
         roles: []
       },
       getters: {
+        aid: state => state.aid,
         token: state => state.token
       },
       mutations: {
