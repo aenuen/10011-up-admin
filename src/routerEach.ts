@@ -24,11 +24,18 @@ router.beforeEach(async (to, from, next) => {
     } else {
       try {
         const { roles } = await store.dispatch('getInfo') // 没有角色去拿一次角色
-        const accessRoutes = await store.dispatch('permission/generateRoutes', roles) // 生成动态路由
-        router.addRoute(accessRoutes) // 添加异步路由，和固定路由进行合并 位置：store/modules/permission/actions
-        next({ ...to, replace: true }) // 前往目标页面，replace:true 后面的页面不会再回到login页面，而是空白页面
+        const accessRoutes = await store.dispatch('generateRoutes', roles) // 生成动态路由
+        console.log(accessRoutes)
+        // // console.log(accessRoutes)
+        // accessRoutes.forEach((addRouter:any) => {
+        //   router.addRoute(addRouter) // 添加异步路由，和固定路由进行合并 位置：store/modules/permission/actions
+        // })
+        // router.addRoute(accessRoutes) // 添加异步路由，和固定路由进行合并 位置：store/modules/permission/actions
+        next({
+          ...to,
+          replace: true
+        }) // 前往目标页面，replace:true 后面的页面不会再回到login页面，而是空白页面
       } catch (error) {
-        console.log(error)
         await store.dispatch('user/resetToken') // 重置token 位置：store/modules/user/resetToken
         ElMessage.error('有错误') // 提示错误
         next(`/login?redirect=${to.path}`) // 重新回到登录页面

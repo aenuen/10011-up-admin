@@ -63,7 +63,8 @@ class Request {
         return result
       }
     }, (error) => {
-      const { code, msg } = error.response.data
+      const message = error.response.data
+      const { code, msg } = message
       ElMessage({ message: msg || '', type: 'error', duration: 5 * 1000 })
       if (code === -2) {
         setTimeout(() => {
