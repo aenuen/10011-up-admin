@@ -8,7 +8,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import './routerEach'
+import './Each'
 
 import '@/libs/utils/vee-validate'
 import SvgIcon from '@/components/Icons/svg/index.vue'

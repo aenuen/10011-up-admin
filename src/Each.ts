@@ -25,6 +25,9 @@ router.beforeEach(async (to, from, next) => {
       try {
         const { roles } = await store.dispatch('getInfo') // 没有角色去拿一次角色
         const accessRoutes = await store.dispatch('generateRoutes', roles) // 生成动态路由
+        for (let i = 0; i < accessRoutes.length; i++) {
+          router.addRoute(accessRoutes[i])
+        }
         console.log(accessRoutes)
         // // console.log(accessRoutes)
         // accessRoutes.forEach((addRouter:any) => {

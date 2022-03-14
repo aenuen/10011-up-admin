@@ -1,9 +1,9 @@
 import Cookies from 'js-cookie'
 import { createStore } from 'vuex'
-import { getToken, setToken } from '@/libs/token'
+import { getToken, setToken, removeToken } from '@/libs/token'
 import { HttpResponse } from '@/libs/axios'
 import { userLogin, userInfo } from '@/api/user'
-import { constantRoutes } from '@/router'
+import router, { constantRoutes, resetRouter } from '@/router'
 import { asyncRoutes } from '@/router/async'
 
 // 使用元角色确定当前用户是否有权限
@@ -379,6 +379,7 @@ const store = createStore({
         }
       },
       actions: {
+        // 用户登录
         login: {
           root: true,
           handler ({ commit }, loginData) {
@@ -405,6 +406,7 @@ const store = createStore({
             })
           }
         },
+        // 用户信息
         getInfo: {
           root: true,
           handler ({ commit }) {
@@ -443,6 +445,30 @@ const store = createStore({
               }
             })
           }
+        },
+        // 退出登录
+        logout ({ commit, dispatch }) { // 用户登出
+          return new Promise((resolve, reject) => {
+            try {
+              commit('SET_TOKEN', '') // 清空token
+              commit('SET_ROLES', []) // 清空角色信息
+              removeToken() // 移除token
+              resetRouter() // 清除所有路由
+              dispatch('tagsView/delAllViews', null, { root: true }) // 删除所有tagsView，重置访问的视图和缓存的视图
+              resolve(true)
+            } catch (e) {
+              reject(e)
+            }
+          })
+        },
+        // 移除token
+        resetToken ({ commit }) {
+          return new Promise(resolve => {
+            commit('SET_TOKEN', '')
+            commit('SET_ROLES', [])
+            removeToken()
+            resolve(true)
+          })
         }
       }
     }

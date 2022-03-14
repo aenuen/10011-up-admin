@@ -6,7 +6,7 @@ export const iconsRouter = {
   component: Layout,
   children: [
     {
-      path: '/icons/iconsList',
+      path: '/iconsList',
       name: 'iconsList',
       component: () => import(/* webpackChunkName: "icons" */ '@/views/aConstant/icons/index.vue'),
       meta: {
