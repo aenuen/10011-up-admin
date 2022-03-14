@@ -8,7 +8,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import './Each'
+// import './Each'
+
+import 'normalize.css/normalize.css'
+import '@/assets/style/layout.scss'
+import '@/components/Icons/font/files/iconfont.css'
 
 import '@/libs/utils/vee-validate'
 import SvgIcon from '@/components/Icons/svg/index.vue'
