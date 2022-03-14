@@ -7,12 +7,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import store from '@/store'
+// import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'HomeView',
   setup () {
-    console.log(store.getters['user/aid'])
+    // const store = useStore()
+    // console.log(store.getters.token)
   }
 })
 </script>
