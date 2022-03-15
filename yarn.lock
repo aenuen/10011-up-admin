@@ -7543,6 +7543,11 @@ wcwidth@^1.0.1:
   dependencies:
     defaults "^1.0.3"
 
+web-storage-cache@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/web-storage-cache/-/web-storage-cache-1.1.1.tgz#42ac07e77ea860e884895be9ba99ab1e04eb162e"
+  integrity sha512-D0MieGooOs8RpsrK+vnejXnvh4OOv/+lTFB35JRkJJQt+uOjPE08XpaE0QBLMTRu47B1KGT/Nq3Gbag3Orinzw==
+
 webidl-conversions@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmmirror.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz"
