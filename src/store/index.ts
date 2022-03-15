@@ -1,20 +1,9 @@
-import { createStore } from 'vuex'
-import app from './modules/app'
-import user from './modules/user'
-import errorLog from './modules/errorLog'
-import permission from './modules/permission'
-import tagsView from './modules/tagsView'
-import getters from './getters'
+import { createPinia } from 'pinia'
+import theAppStore from './modules/app'
+import theErrorLogStore from './modules/errorLog'
+import theUserStore from './modules/user'
 
-const store = createStore({
-  modules: {
-    app,
-    errorLog,
-    permission,
-    tagsView,
-    user
-  },
-  getters
-})
+const create = createPinia()
 
-export default store
+export { theAppStore, theErrorLogStore, theUserStore }
+export default create

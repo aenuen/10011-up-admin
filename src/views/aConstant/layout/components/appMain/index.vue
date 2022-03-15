@@ -15,13 +15,13 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import router from '@/router'
-import store from '@/store'
+import { theUserStore } from '@/store'
 
 export default defineComponent({
   name: 'LayoutAppMain',
   setup () {
     return {
-      cachedViews: computed(() => store.getters['user/token']),
+      cachedViews: computed(() => theUserStore().token),
       key: computed(() => router.push)
     }
   }

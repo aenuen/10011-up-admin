@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, Canceler } from 'axios'
-import store from '@/store'
+import { theUserStore } from '@/store'
 import { getToken } from '@/libs/token'
 import { HttpResponse } from './index'
 import { ElMessage } from 'element-plus'
@@ -32,7 +32,7 @@ class Request {
 
   interceptors (instance: AxiosInstance) {
     instance.interceptors.request.use((config) => { // 请求拦截器
-      config.headers = store.getters['user/token']
+      config.headers = theUserStore().token
         ? {
             'Content-Type': 'application/json;charset=utf-8',
             'cached-control': 'no-cache',

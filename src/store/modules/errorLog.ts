@@ -1,24 +1,21 @@
-const errorLog:any = {
-  namespaced: true,
-  state: {
-    logs: []
-  },
-  mutations: {
-    ADD_ERROR_LOG: (state:any, log:object) => {
-      state.logs.push(log)
-    },
-    CLEAR_ERROR_LOG: (state:any) => {
-      state.logs.splice(0)
-    }
-  },
-  actions: {
-    ADD_ERROR_LOG ({ commit }:any, log:object) {
-      commit('ADD_ERROR_LOG', log)
-    },
-    CLEAR_ERROR_LOG ({ commit }:any) {
-      commit('CLEAR_ERROR_LOG')
-    }
-  }
+import { defineStore } from 'pinia'
+
+interface ErrorLogFace {
+  logs: any[]
 }
 
-export default errorLog
+const theErrorLogStore = defineStore('errorLog', {
+  state: (): ErrorLogFace => ({
+    logs: []
+  }),
+  actions: {
+    insertLog (log:object) {
+      this.logs.push(log)
+    },
+    clearLog () {
+      this.logs.splice(0)
+    }
+  }
+})
+
+export default theErrorLogStore

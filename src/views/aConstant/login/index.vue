@@ -72,18 +72,9 @@ import { loginUtils } from './utils/loginUtils'
 export default defineComponent({
   name: 'LoginIndex',
   setup () {
-    const {
-      postForm,
-      otherData,
-      fields,
-      getCaptcha,
-      submitLogin
-    } = loginUtils()
-    setTimeout(() => {
-      getCaptcha()
-    }, 500)
+    const { postForm, otherData, fields, getCaptcha, submitLogin } = loginUtils()
     onMounted(() => {
-      //
+      getCaptcha()
     })
     return {
       postForm,

@@ -4,7 +4,7 @@ import { HttpResponse } from '@/libs/axios'
 import { CryptoJsEncode } from '@/libs/cryptoJs'
 import { routerUtils } from '@/libs/utils/router'
 import { publicCaptcha } from '@/api/public'
-import store from '@/store'
+import { theUserStore } from '@/store'
 import { ElMessage } from 'element-plus'
 
 export const loginUtils = () => {
@@ -27,19 +27,13 @@ export const loginUtils = () => {
       postForm.sid = uuid()
       localStorage.setItem('sid', postForm.sid)
     }
-    const {
-      code,
-      data
-    } = await publicCaptcha({
-      sid: postForm.sid,
-      height: 36
-    }) as HttpResponse
+    const { code, data } = await publicCaptcha({ sid: postForm.sid, height: 36 }) as HttpResponse
     if (code === 200) {
       otherData.captcha = data
     }
   }
   const submitLogin = () => {
-    store.dispatch('login', {
+    theUserStore().login({
       username: CryptoJsEncode(postForm.username),
       password: CryptoJsEncode(postForm.password),
       authCode: postForm.authCode,

@@ -1,52 +1,51 @@
+import { defineStore } from 'pinia'
 import Cookies from 'js-cookie'
 
-const app:any = {
-  namespaced: true,
-  state: {
+const opened = (): boolean => Cookies.get('sidebarStatus') ? !!Cookies.get('sidebarStatus') : true
+
+interface SidebarFace {
+  opened: boolean;
+  withoutAnimation: boolean
+}
+
+export interface AppFace {
+  sidebar: SidebarFace;
+  device: string;
+  size: string;
+}
+
+const theAppStore = defineStore('user', {
+  state: (): AppFace => ({
     sidebar: {
-      opened: () => Cookies.get('sidebarStatus') ? !!Number(Cookies.get('sidebarStatus')) : true,
+      opened: opened(),
       withoutAnimation: false
     },
     device: 'desktop',
     size: Cookies.get('size') || 'medium'
-  },
-  mutations: {
-    TOGGLE_SIDEBAR: (state:any) => {
-      state.sidebar.opened = !state.sidebar.opened
-      state.sidebar.withoutAnimation = false
-      if (state.sidebar.opened) {
+  }),
+  actions: {
+    toggleSidebar () {
+      this.sidebar.opened = !this.sidebar.opened
+      this.sidebar.withoutAnimation = false
+      if (this.sidebar.opened) {
         Cookies.set('sidebarStatus', '1')
       } else {
         Cookies.set('sidebarStatus', '0')
       }
     },
-    CLOSE_SIDEBAR: (state:any, withoutAnimation:number) => {
+    closeSidebar (withoutAnimation: boolean) {
       Cookies.set('sidebarStatus', '0')
-      state.sidebar.opened = false
-      state.sidebar.withoutAnimation = withoutAnimation
+      this.sidebar.opened = false
+      this.sidebar.withoutAnimation = withoutAnimation
     },
-    TOGGLE_DEVICE: (state:any, device:string) => {
-      state.device = device
+    toggleDevice (device:string) {
+      this.device = device
     },
-    SET_SIZE: (state:any, size:string) => {
-      state.size = size
+    setSize (size:string) {
       Cookies.set('size', size)
-    }
-  },
-  actions: {
-    toggleSideBar ({ commit }:any) {
-      commit('TOGGLE_SIDEBAR')
-    },
-    closeSideBar ({ commit }:any, { withoutAnimation }:any) {
-      commit('CLOSE_SIDEBAR', withoutAnimation)
-    },
-    toggleDevice ({ commit }:any, { device }:any) {
-      commit('TOGGLE_DEVICE', device)
-    },
-    handler ({ commit }:any, size:string) {
-      commit('SET_SIZE', size)
+      this.size = size
     }
   }
-}
+})
 
-export default app
+export default theAppStore
