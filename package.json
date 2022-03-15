@@ -24,6 +24,7 @@
     "methods-libs": "^1.0.6",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
+    "pinia": "^2.0.12",
     "print-js": "^1.6.0",
     "uuid": "^8.3.2",
     "vee-validate": "^4.5.8",
