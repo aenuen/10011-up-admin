@@ -46,11 +46,11 @@ const theUserStore = defineStore('user', {
         const { code, data } = await userInfo() as HttpResponse
         if (code === 200) {
           data || reject(new Error('验证失败，请重新登录'))
-          const { roles } = data
+          const { id, petName, realName, email, mobile, avatar, introduction, roles } = data
           if (!roles || roles.length <= 0) {
             reject(new Error('您的账号中没有任何的权限'))
           } else {
-            this.setInfo(data)
+            this.setInfo({ aid: id, petName, realName, email, mobile, avatar, introduction, roles })
             resolve(data)
           }
         } else {
