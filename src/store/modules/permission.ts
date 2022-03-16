@@ -39,7 +39,7 @@ const thePermissionStore = defineStore('permission', {
     generateRoutes (roles:any) {
       return new Promise(resolve => {
         // 要是admin直接赋权限，否则去循环筛选
-        const accessedRoutes = roles.includes('admin') ? (asyncRoutes || []) : filterAsyncRoutes(asyncRoutes, roles)
+        const accessedRoutes = roles.includes('admin') ? asyncRoutes : filterAsyncRoutes(asyncRoutes, roles)
         this.setRoutes(accessedRoutes)
         resolve(accessedRoutes)
       })

@@ -16,6 +16,18 @@ export interface UserFace {
   roles?: string[];
 }
 
+export interface DateFace {
+  id?: string,
+  token?: string,
+  realName?: string,
+  petName?: string,
+  email?: string,
+  mobile?: string,
+  avatar?: string,
+  introduction?: string,
+  roles?: string;
+}
+
 const theUserStore = defineStore('user', {
   state: (): UserFace => ({
     aid: '',
@@ -71,11 +83,12 @@ const theUserStore = defineStore('user', {
         const { code, data } = await userInfo() as HttpResponse
         if (code === 200) {
           data || reject(new Error('验证失败，请重新登录'))
-          const { id, petName, realName, email, mobile, avatar, introduction, roles } = data
-          if (!roles || roles.length <= 0) {
+          const { id, petName, realName, email, mobile, avatar, introduction, roles = '' } = data as DateFace
+          const userRoles = roles?.split(',') || []
+          if (userRoles.length <= 0) {
             reject(new Error('您的账号中没有任何的权限'))
           } else {
-            this.setInfo({ aid: id, petName, realName, email, mobile, avatar, introduction, roles: [roles] })
+            this.setInfo({ aid: id, petName, realName, email, mobile, avatar, introduction, roles: userRoles })
             resolve(data)
           }
         } else {

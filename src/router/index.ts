@@ -34,8 +34,7 @@ router.beforeEach(async (to, from, next) => {
         try {
           await theUserStore().userInfo()
           const { roles } = theUserStore().getUserInfo
-          let accessRoutes = []
-          accessRoutes = await thePermissionStore().generateRoutes(roles) as any[]
+          const accessRoutes = await thePermissionStore().generateRoutes(roles) as any[]
           accessRoutes.forEach((item) => {
             router.addRoute(item)
           })

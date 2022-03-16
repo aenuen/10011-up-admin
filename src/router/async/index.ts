@@ -1,4 +1,4 @@
-import { iconsRouter } from './modules/icons'
+import { salaryRouter } from './modules/salary'
 export const asyncRoutes = [
-  iconsRouter
+  salaryRouter
 ]
