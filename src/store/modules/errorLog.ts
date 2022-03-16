@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-interface ErrorLogFace {
+export interface ErrorLogFace {
   logs: any[]
 }
 

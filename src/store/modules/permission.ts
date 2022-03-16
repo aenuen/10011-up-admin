@@ -1,5 +1,11 @@
+import { defineStore } from 'pinia'
 import { constantRoutes } from '@/router'
 import { asyncRoutes } from '@/router/async'
+
+export interface PermissionFace {
+  routes: any[],
+  addRoutes: any[]
+}
 
 // 使用元角色确定当前用户是否有权限
 const hasPermission = (roles: string[], route: Record<string, any>) => {
@@ -20,32 +26,25 @@ export const filterAsyncRoutes = (routes:Record<string, any>, roles:string[]) =>
   return res
 }
 
-const permission:any = {
-  namespaced: true,
-  state: {
+const thePermissionStore = defineStore('permission', {
+  state: (): PermissionFace => ({
     routes: [],
     addRoutes: []
-  },
-  mutations: {
-    SET_ROUTES: (state:any, routes:any) => {
-      state.addRoutes = routes // 备份
-      state.routes = constantRoutes.concat(routes) // 固定和异步路由进行合并
-    }
-  },
+  }),
   actions: {
-    generateRoutes: {
-      root: true,
-      handler ({ commit }:any, roles:any) {
-        return new Promise(resolve => {
-          // 要是admin直接赋权限，否则去循环筛选
-          const accessedRoutes = roles.includes('admin') ? (asyncRoutes || []) : filterAsyncRoutes(asyncRoutes, roles)
-          console.log(accessedRoutes)
-          commit('SET_ROUTES', accessedRoutes)
-          resolve(accessedRoutes)
-        })
-      }
+    setRoutes (routes:any) {
+      this.addRoutes = routes // 备份
+      this.routes = constantRoutes.concat(routes) // 固定和异步路由进行合并
+    },
+    generateRoutes (roles:any) {
+      return new Promise(resolve => {
+        // 要是admin直接赋权限，否则去循环筛选
+        const accessedRoutes = roles.includes('admin') ? (asyncRoutes || []) : filterAsyncRoutes(asyncRoutes, roles)
+        this.setRoutes(accessedRoutes)
+        resolve(accessedRoutes)
+      })
     }
   }
-}
+})
 
-export default permission
+export default thePermissionStore
