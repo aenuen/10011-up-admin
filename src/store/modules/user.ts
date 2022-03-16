@@ -29,7 +29,7 @@ const theUserStore = defineStore('user', {
     roles: []
   }),
   getters: {
-    userInfo (state: UserFace): UserFace {
+    getUserInfo (state: UserFace): UserFace {
       return { ...state }
     }
   },
@@ -75,7 +75,7 @@ const theUserStore = defineStore('user', {
           if (!roles || roles.length <= 0) {
             reject(new Error('您的账号中没有任何的权限'))
           } else {
-            this.setInfo({ aid: id, petName, realName, email, mobile, avatar, introduction, roles })
+            this.setInfo({ aid: id, petName, realName, email, mobile, avatar, introduction, roles: [roles] })
             resolve(data)
           }
         } else {
