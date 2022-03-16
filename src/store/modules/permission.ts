@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { constantRoutes } from '@/router'
+import { constantRoutes } from '@/router/constant'
 import { asyncRoutes } from '@/router/async'
 
 export interface PermissionFace {
