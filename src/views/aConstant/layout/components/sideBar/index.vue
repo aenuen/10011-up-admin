@@ -1,13 +1,13 @@
 <template>
-  <div :class="{'has-logo':showLogo}">
+  <div :class="{'has-logo':state.showLogo}">
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
-        :default-active="state.activeMenu"
+        :default-active="state.activeMenu()"
         :collapse="state.isCollapse"
-        :background-color="variables.menuBg"
-        :text-color="variables.menuText"
+        background-color="#304156"
+        text-color="#bfcbd9"
         :unique-opened="false"
-        :active-text-color="variables.menuActiveText"
+        active-text-color="#409EFF"
         :collapse-transition="false"
         mode="vertical"
       >
@@ -25,6 +25,7 @@ export default defineComponent({
   name: 'LayoutSideBar',
   setup () {
     const { state } = sidebarUtils()
+    console.log(state.activeMenu())
     return {
       state
     }

@@ -37,6 +37,7 @@
   float: right !important;
 }
 
+/* 鼠标样式 */
 .c-pointer {
   cursor: pointer !important;
 }
@@ -53,6 +54,16 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+/* display */
+
+.block {
+  display: block;
+}
+
+.inlineBlock {
+  display: inline-block;
 }
 
 @for $i from 0 through 20 {

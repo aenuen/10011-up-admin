@@ -1,19 +1,23 @@
 <template>
   <div class="home">
     <div class="ml10">123</div>
-    <el-icon :size="30" color="blue"><Aim/></el-icon>
+    <el-icon :size="30" color="blue">
+      <Aim />
+    </el-icon>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-// import { useStore } from 'vuex'
+import { theSettingsStore } from '@/store'
 
 export default defineComponent({
   name: 'HomeView',
   setup () {
-    // const store = useStore()
-    // console.log(store.getters.token)
+    theSettingsStore().changeSetting({
+      key: 'showSettings',
+      value: true
+    })
   }
 })
 </script>
