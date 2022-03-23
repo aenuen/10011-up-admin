@@ -9,6 +9,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "lint:lint-staged": "lint-staged",
+    "lint:prettier": "prettier --write --loglevel warn \"src/**/*{js,json,tsx,ts,css,less,scss,vue,html,md}\"",
+    "lint:eslint": "eslint \"{src,mock/**/*.{vue,ts,tsx,js,jsx}}\" --fix",
     "rm:dist": "rimraf dist",
     "rm:node": "rimraf node_modules"
   },
