@@ -54,6 +54,8 @@
     "web-storage-cache": "^1.1.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@types/clipboard": "^2.0.7",
     "@types/crypto-js": "^4.1.1",
     "@types/js-cookie": "^3.0.1",
