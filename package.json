@@ -17,15 +17,18 @@
   },
   "lint-staged": {
     "*.{css,scss}": [
-      "stylelint --fix",
       "prettier --write"
     ],
     "*.{md,json}": [
       "prettier --write"
     ],
-    "*.ts?(x),*.js?(x)": [
-      "prettier --parse=typescript --write",
-      "eslint --fix"
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --parse=typescript --write"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
     ]
   },
   "dependencies": {
