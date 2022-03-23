@@ -1,10 +1,10 @@
 <template>
   <section class="app-main">
-    <div style="padding: 20px;">
+    <div style="padding: 20px">
       <router-view v-slot="{ Component }" :key="key">
         <transition name="fade-transform" mode="out-in">
           <keep-alive>
-            <component :is="Component"/>
+            <component :is="Component" />
           </keep-alive>
         </transition>
       </router-view>
@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
 import router from '@/router'
 import { theUserStore } from '@/store'
+import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'LayoutAppMain',

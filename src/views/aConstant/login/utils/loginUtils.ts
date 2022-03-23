@@ -1,11 +1,11 @@
-import { reactive } from 'vue'
-import { v4 as uuid } from 'uuid'
+import { publicCaptcha } from '@/api/public'
 import { HttpResponse } from '@/libs/axios'
 import { CryptoJsEncode } from '@/libs/cryptoJs'
 import { routerUtils } from '@/libs/utils/router'
-import { publicCaptcha } from '@/api/public'
 import { theUserStore } from '@/store'
-import { ElMessage } from 'element-plus'
+import { ElMessage, MessageParamsTyped } from 'element-plus'
+import { v4 as uuid } from 'uuid'
+import { reactive } from 'vue'
 
 export const loginUtils = () => {
   const { goToPath } = routerUtils()
@@ -40,7 +40,7 @@ export const loginUtils = () => {
       sid: postForm.sid
     }).then(() => {
       goToPath('/')
-    }).catch((err) => {
+    }).catch((err: MessageParamsTyped | undefined) => {
       ElMessage.success(err)
     })
   }

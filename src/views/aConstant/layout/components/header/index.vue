@@ -2,7 +2,9 @@
   <el-header class="header">
     <div class="toolbar">
       <el-dropdown>
-        <el-icon style="margin-right: 8px; margin-top: 1px"><setting /></el-icon>
+        <el-icon style="margin-right: 8px; margin-top: 1px">
+          <setting />
+        </el-icon>
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>View</el-dropdown-item>
@@ -16,7 +18,7 @@
   </el-header>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'LayoutHeader'
 }
