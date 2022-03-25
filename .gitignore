@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 /dist
-
+winpty
 
 # local env files
 .env.local
@@ -13,8 +13,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-yarn.lock
-
 # Editor directories and files
 .idea
 .vscode
@@ -23,3 +21,11 @@ yarn.lock
 *.njsproj
 *.sln
 *.sw?
+
+# Yarn
+yarn.lock
+package-lock.json
+
+# PHP
+.htaccess
+nginx.htaccess
