@@ -10,10 +10,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { theSettingsStore } from '@/store'
+import { calcSum } from '@/libs/methods/src/calc/calcSum'
 
 export default defineComponent({
   name: 'HomeView',
-  setup () {
+  setup() {
+    const a = calcSum([1.1, 1.2])
+    console.log(a)
     theSettingsStore().changeSetting({
       key: 'showSettings',
       value: true
