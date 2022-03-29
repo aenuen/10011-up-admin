@@ -6,12 +6,12 @@ node_modules
 *.ttf
 .vscode
 .idea
-dist
-/public
-/docs
 .husky
 .local
-/bin
 Dockerfile
+/dist
+/public
+/docs
+/bin
 /src/assets
 /src/components/Icons
