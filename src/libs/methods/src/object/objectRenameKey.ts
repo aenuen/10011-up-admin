@@ -5,7 +5,11 @@
  * @param {String} newKey
  * @returns {Object}
  */
-export const objectRenameKey = (object, key, newKey) => {
+export const objectRenameKey = (
+  object: Record<string | number | symbol, any>,
+  key: string,
+  newKey: string
+) => {
   if (Object.keys(object).indexOf(key) !== -1) {
     object[newKey] = object[key]
     delete object[key]

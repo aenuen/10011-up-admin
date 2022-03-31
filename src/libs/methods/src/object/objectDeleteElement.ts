@@ -9,7 +9,7 @@ export const objectDeleteElement = (
   object: Record<string | number | symbol, any>,
   key: string | string[]
 ) => {
-  const keyAry = typeArray(key) ? key : [key]
+  const keyAry = (typeArray(key) ? key : [key]) as string[]
   keyAry.map((item) => delete object[item])
   return object
 }
