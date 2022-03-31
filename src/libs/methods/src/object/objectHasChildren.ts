@@ -7,7 +7,7 @@
 export const objectHasChildren = (
   object: Record<string | number | symbol, any>,
   nodeName: string
-) => {
+): boolean => {
   nodeName = nodeName || 'children'
   return object[nodeName] && object[nodeName].length > 0
 }

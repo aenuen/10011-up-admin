@@ -9,7 +9,7 @@ export const objectRenameKey = (
   object: Record<string | number | symbol, any>,
   key: string,
   newKey: string
-) => {
+): Record<string | number | symbol, any> => {
   if (Object.keys(object).indexOf(key) !== -1) {
     object[newKey] = object[key]
     delete object[key]
