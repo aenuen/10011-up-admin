@@ -23,9 +23,10 @@ export default defineComponent({
   props: {
     isActive: { type: Boolean, default: false }
   },
-  setup(props) {
+  emits: ['toggleClick'],
+  setup(props, ctx) {
     const toggleClick = () => {
-      emit('toggleClick')
+      ctx.emit('toggleClick')
     }
     return {
       props,
