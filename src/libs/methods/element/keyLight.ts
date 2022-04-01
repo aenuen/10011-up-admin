@@ -17,7 +17,7 @@ export const keyLight = (
     ? object[key]
       ? value.replace(
           new RegExp(object[key], 'ig'),
-          (val) => `<span style="color:${color}">${val}</span>`
+          (val) => `<span style='color:${color}'>${val}</span>`
         )
       : value
     : '--'
