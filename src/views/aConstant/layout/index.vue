@@ -58,9 +58,9 @@
       </el-scrollbar>
     </el-aside>
     <el-container>
-      <Header/>
+      <Header />
       <el-scrollbar>
-        <app-main/>
+        <app-main />
       </el-scrollbar>
     </el-container>
   </el-container>
@@ -71,6 +71,7 @@ import { defineComponent } from 'vue'
 import Header from './components/header/index.vue'
 import AppMain from './components/appMain/index.vue'
 import { layoutUtils } from './utils/layoutUtils'
+import router from '@/router'
 
 export default defineComponent({
   name: 'LayoutIndex',
@@ -78,17 +79,17 @@ export default defineComponent({
     Header,
     AppMain
   },
-  setup () {
+  setup() {
     const { state } = layoutUtils()
-    console.log(state.sidebar)
+    console.log(state.sidebar, router)
     return {}
   }
 })
 </script>
 
 <style lang="scss" scoped>
-@import "~@/assets/style/mixin.scss";
-@import "~@/assets/style/variables.scss";
+@import '@/assets/style/mixin.scss';
+@import '@/assets/style/variables.scss';
 
 .app-wrapper {
   @include clearfix;
