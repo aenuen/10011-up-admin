@@ -1,6 +1,6 @@
-@import "./variables.scss";
-@import "./transition.scss";
-@import "./supplement.scss";
+@import 'variables.module';
+@import 'transition';
+@import 'supplement';
 
 html {
   height: 100%;
@@ -12,16 +12,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
+    Microsoft YaHei, Arial, sans-serif;
 }
 
 #app {
-
   height: 100%;
 
   .main-container {
     min-height: 100%;
-    transition: margin-left .28s;
+    transition: margin-left 0.28s;
     margin-left: $sideBarWidth;
     position: relative;
 
@@ -43,5 +43,4 @@ body {
     z-index: 1001;
     overflow: hidden;
   }
-
 }

@@ -88,8 +88,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/style/mixin.scss';
-@import '@/assets/style/variables.scss';
+@import '~@/assets/style/_mixin.scss';
+@import '~@/assets/style/_variables.module.scss';
 
 .app-wrapper {
   @include clearfix;

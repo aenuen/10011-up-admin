@@ -8,8 +8,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-// import './Each'
-
 import 'normalize.css/normalize.css'
 import '@/assets/style/layout.scss'
 import '@/components/Icons/font/files/iconfont.css'
@@ -24,7 +22,8 @@ Object.keys(Icons).forEach((key) => {
   app.component(key, Icons[key as keyof typeof Icons])
 })
 
-app.component('svg-icon', SvgIcon)
+app
+  .component('svg-icon', SvgIcon)
   .use(ElementPlus, { size: Cookies.get('size') || 'default' })
   .use(store)
   .use(router)

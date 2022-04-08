@@ -1,7 +1,15 @@
 const path = require('path')
 const { defineConfig } = require('@vue/cli-service')
-const resolve = dir => path.join(__dirname, dir)
+const resolve = (dir) => path.join(__dirname, dir)
 module.exports = defineConfig({
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+        '~style': path.resolve(__dirname, 'src/assets/style')
+      }
+    }
+  },
   transpileDependencies: true,
   devServer: {
     host: 'localhost',
@@ -12,9 +20,14 @@ module.exports = defineConfig({
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
     svgRule.exclude.add(resolve('src/components/Icons/svg/files')).end()
-    config.module.rule('icons')
-      .test(/\.svg$/).include.add(resolve('src/components/Icons/svg/files')).end()
-      .use('svg-sprite-loader').loader('svg-sprite-loader')
-      .options({ symbolId: 'icon-[name]' }).end()
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('src/components/Icons/svg/files'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({ symbolId: 'icon-[name]' })
+      .end()
   }
 })
