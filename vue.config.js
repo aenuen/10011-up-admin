@@ -6,7 +6,7 @@ module.exports = defineConfig({
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
-        '~style': path.resolve(__dirname, 'src/assets/style')
+        '~style': path.resolve(__dirname, 'src/assets/styles')
       }
     }
   },

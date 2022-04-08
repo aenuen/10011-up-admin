@@ -1,23 +1,27 @@
 import { defineStore } from 'pinia'
 import settings from '@/settings'
+import variables from '@/assets/styles/_theme.module.scss'
+
 const { showSettings, tagsView, fixedHeader, sidebarLogo } = settings
 
 interface SettingsFace {
-  showSettings: boolean,
-  tagsView: boolean,
-  fixedHeader: boolean,
+  theme: string
+  showSettings: boolean
+  tagsView: boolean
+  fixedHeader: boolean
   sidebarLogo: boolean
 }
 
 const theSettingsStore = defineStore('settings', {
-  state: ():SettingsFace => ({
+  state: (): SettingsFace => ({
+    theme: variables.theme,
     showSettings: showSettings,
     tagsView: tagsView,
     fixedHeader: fixedHeader,
     sidebarLogo: sidebarLogo
   }),
   actions: {
-    changeSetting (data:{key:string, value:boolean}) {
+    changeSetting(data: { key: string; value: boolean }) {
       const { key, value } = data
       switch (key) {
         case 'showSettings':
@@ -33,7 +37,6 @@ const theSettingsStore = defineStore('settings', {
           this.sidebarLogo = value
           break
       }
-      console.log(key, value, this.$state.showSettings)
     }
   }
 })

@@ -43,4 +43,10 @@ body {
     z-index: 1001;
     overflow: hidden;
   }
+
+  .showRightPanel {
+    overflow: hidden;
+    position: relative;
+    width: calc(100% - 15px);
+  }
 }

@@ -9,7 +9,7 @@ import router from './router'
 import store from './store'
 
 import 'normalize.css/normalize.css'
-import '@/assets/style/layout.scss'
+import '@/assets/styles/layout.scss'
 import '@/components/Icons/font/files/iconfont.css'
 
 import '@/libs/utils/vee-validate'
@@ -31,7 +31,7 @@ app
   .mount('#app')
 
 // import { createVNode } from 'vue'
-// createVNode 方式注册组件(使用：<ele-icon :icon="item" style="width: 30px;height:30px;"/>)
+// createVNode 方式注册组件(使用：<ele-icon :icon="item" styles="width: 30px;height:30px;"/>)
 // const Icon = (props: { icon: string }) => {
 //   const { icon } = props
 //   return createVNode(Icons[icon as keyof typeof Icons])

@@ -1,4 +1,5 @@
 interface Variables {
+  theme: string
   menuText: string
   menuActiveText: string
   subMenuActiveText: string
