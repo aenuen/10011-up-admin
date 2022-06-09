@@ -31,7 +31,7 @@ import {
   getCurrentInstance
 } from 'vue'
 import { theSettingsStore } from '@/store'
-import { classAdd, classRemove } from '@/libs/methods'
+import { classAdd, classRemove } from 'methods-often'
 
 export default defineComponent({
   name: 'ComponentsRightPanel',

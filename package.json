@@ -41,6 +41,7 @@
     "crypto-js": "^4.1.1",
     "element-plus": "^2.1.8",
     "js-cookie": "^3.0.1",
+    "methods-often": "^1.1.1",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.13",
